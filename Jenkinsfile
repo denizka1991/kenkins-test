@@ -1,10 +1,12 @@
+#!groovy
+
 pipeline {
-  agent any
-  stages {
-    stage('') {
-      steps {
-        sh 'date'
-      }
+    agent { docker { image 'python:3.5.1' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'python unit-test.py'
+            }
+        }
     }
-  }
 }
