@@ -18,7 +18,6 @@ podTemplate(label: label, containers: [
 
             stage("run in other container"){
                 container('zip'){
-
                     sh "zip -v"
                 }
             }
