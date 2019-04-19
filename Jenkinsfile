@@ -19,12 +19,13 @@ podTemplate(label: label, containers: [
             stage("run in other container"){
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
                     //set SECRET with the credential content
-                        sh 'ls -al $SVC_ACCOUNT_KEY'
+                        sh 'mv \$SVC_ACCOUNT_KEY test'
+                        sh 'ls -a'
 }
                 container('zip'){
                     sh "zip -v"
                   sh 'mkdir -p creds'
-                  sh "cp \*\*\*\*/ ./creds/serviceaccount.json"
+                  sh "cp test ./creds/serviceaccount.json"
                   sh "ls -alh ./creds/"
                 }
             }
