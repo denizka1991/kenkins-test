@@ -26,7 +26,7 @@ podTemplate(label: label, containers: [
                     sh "zip -v"
                   sh 'mkdir -p creds'
                   sh "cp test ./creds/serviceaccount.json"
-                  sh "ls -alh ./creds/"
+                  sh "cat ./creds/serviceaccount.json"
                 }
             }
         }
