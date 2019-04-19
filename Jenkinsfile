@@ -24,7 +24,7 @@ podTemplate(label: label, containers: [
                 container('zip'){
                     sh "zip -v"
                   sh 'mkdir -p creds'
-                  sh "cp \$SVC_ACCOUNT_KEY ./creds/serviceaccount.json"
+                  sh "cp \*\*\*\*/ ./creds/serviceaccount.json"
                   sh "ls -alh ./creds/"
                 }
             }
