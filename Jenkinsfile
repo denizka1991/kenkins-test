@@ -21,7 +21,7 @@ podTemplate(label: label, containers: [
 		    sh 'mkdir -p creds'
                     sh 'mv \$SVC_ACCOUNT_KEY test'
 		    sh "cp test ./creds/serviceaccount.json"
-		    sh "export GOOGLE_APPLICATION_CREDENTIALS=\"/home/jenkins/workspace/kenkins-test_master/creds/serviceaccount.json\""
+		    sh "./test.sh"
 		    sh "pip3 install -r ./app/requirements.txt"
                     sh "python3 test.py"
                 }
