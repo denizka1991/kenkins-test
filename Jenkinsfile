@@ -14,7 +14,7 @@ podTemplate(label: label, containers: [
                 container("python-alpine"){
 		    sh 'mkdir -p creds'
 		    sh "cp test ./creds/serviceaccount.json"
-		    sh " export GOOGLE_APPLICATION_CREDENTIALS="./creds/serviceaccount.json"
+		    sh "export GOOGLE_APPLICATION_CREDENTIALS="./creds/serviceaccount.json""
                     sh "python3 test.py"
                 }
             }
