@@ -2,7 +2,7 @@ def label = "mypod"
 
 
 podTemplate(label: label, containers: [
-  containerTemplate(name: 'python', image: 'python:3', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'python', image: 'python3', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'zip', image: 'kramos/alpine-zip', command: 'cat', ttyEnabled: true)
 ])
 {
@@ -17,7 +17,7 @@ podTemplate(label: label, containers: [
                 }
             stage("run in one container"){
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
-                container("python-alpine"){
+                container("python"){
 		    sh 'mkdir -p creds'
                     sh 'mv \$SVC_ACCOUNT_KEY test'
 		    sh "cp test ./creds/serviceaccount.json"
