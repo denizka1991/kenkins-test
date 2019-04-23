@@ -2,7 +2,7 @@ def label = "mypod"
 
 
 podTemplate(label: label, containers: [
-  containerTemplate(name: 'python', image: 'python3', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'python', image: 'python:3', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'zip', image: 'kramos/alpine-zip', command: 'cat', ttyEnabled: true)
 ])
 {
