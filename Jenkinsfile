@@ -10,6 +10,10 @@ podTemplate(label: label, containers: [
     node(label)
     {
         try {
+            stage('Clone repo'){
+                //git url: 'https://github.com/Yuriy6735/Demo3.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                userRemoteConfigs: [[url: 'https://github.com/denizka1991/kenkins-test.git']]])
             stage("run in one container"){
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
                 container("python-alpine"){
