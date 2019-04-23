@@ -12,7 +12,10 @@ podTemplate(label: label, containers: [
         try {
             stage("run in one container"){
                 container("python-alpine"){
-                    sh "python --version"
+		    sh 'mkdir -p creds'
+		    sh "cp test ./creds/serviceaccount.json"
+		    sh " export GOOGLE_APPLICATION_CREDENTIALS="./creds/serviceaccount.json"
+                    sh "python3 test.py"
                 }
             }
 
