@@ -22,7 +22,8 @@ podTemplate(label: label, containers: [
                     sh 'mv \$SVC_ACCOUNT_KEY test'
 		    sh "cp test ./creds/serviceaccount.json"
 		    sh "export GOOGLE_APPLICATION_CREDENTIALS='./creds/serviceaccount.json'"
-		    sh "pip3 install -r ./app/requirements.txt "
+		    sh "pip3 install -r ./app/requirements.txt"
+		    sh "pwd"
                     sh "python3 test.py"
                 }
             }
