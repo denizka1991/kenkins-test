@@ -11,14 +11,16 @@ podTemplate(label: label, containers: [
     {
         try {
             stage("run in one container"){
+              withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
                 container("python-alpine"){
 		    sh 'mkdir -p creds'
+                    sh 'mv \$SVC_ACCOUNT_KEY test'
 		    sh "cp test ./creds/serviceaccount.json"
 		    sh "export GOOGLE_APPLICATION_CREDENTIALS="./creds/serviceaccount.json""
                     sh "python3 test.py"
                 }
             }
-
+        }
             stage("run in other container"){
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
                     //set SECRET with the credential content
