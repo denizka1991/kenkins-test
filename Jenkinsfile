@@ -23,7 +23,7 @@ podTemplate(label: label, containers: [
 		    sh "cp test ./creds/serviceaccount.json"
 		    sh 'export GOOGLE_APPLICATION_CREDENTIALS="/home/jenkins/workspace/kenkins-test_master/creds/serviceaccount.json"'
 		    sh "pip3 install -r ./app/requirements.txt"
-		    sh "pwd"
+		    sh "echo $GOOGLE_APPLICATION_CREDENTIALS"
                     sh "python3 test.py"
                 }
             }
