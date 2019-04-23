@@ -16,7 +16,7 @@ podTemplate(label: label, containers: [
 		    sh 'mkdir -p creds'
                     sh 'mv \$SVC_ACCOUNT_KEY test'
 		    sh "cp test ./creds/serviceaccount.json"
-		    sh "export GOOGLE_APPLICATION_CREDENTIALS="./creds/serviceaccount.json""
+		    sh "export GOOGLE_APPLICATION_CREDENTIALS='./creds/serviceaccount.json'"
                     sh "python3 test.py"
                 }
             }
