@@ -1,12 +1,13 @@
 from google.cloud import pubsub_v1
 from pymongo import MongoClient
 import base64
+import os
 
 import json
 
 
 def message_from_topic1(request, message):
-    project_id = "dynamic-circle-235118"
+    project_id = os.environ.get('project')
     subscription_name = "topic1"
 
     subscriber = pubsub_v1.SubscriberClient()
@@ -19,8 +20,13 @@ def message_from_topic1(request, message):
         message.ack()
 
     subscriber.subscribe(subscription_path, callback=callback)
+    # ged DB external IP address
 
-    client = MongoClient('mongodb://main_admin:abc123@35.241.132.65/mysinoptik', 27017)
+    user_name = os.environ.get('user_name')
+    user_pass = os.environ.get('user_pass')
+    ip = os.environ.get('ip')
+
+    client = MongoClient('mongodb://{0}:{1}@{2}/mysinoptik'.format(user_name,user_pass,ip), 27017)
     db = client.mysinoptik
     collection_weth = db.weather
     if not request:
@@ -32,4 +38,4 @@ def message_from_topic1(request, message):
 
     collection_weth.insert_one(a)
 
-    print('Listening messages {0}, {1}'.format(c, type(c)))
+    print('Listening messages {0}, {1}'.format(a, type(a)))
