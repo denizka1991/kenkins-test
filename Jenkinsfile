@@ -27,6 +27,9 @@ podTemplate(label: label, containers: [
                     sh "python3 test.py"
                     sh "cd savedb"
 		    sh "python3 test.py"
+		    sh "cd .."
+		    sh "cd saveredis"
+                    sh "python3 test.py"
                 }
             }
         }
