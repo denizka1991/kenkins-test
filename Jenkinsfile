@@ -25,6 +25,8 @@ podTemplate(label: label, containers: [
 		    sh "pip3 install -r ./app/requirements.txt"
 		    sh "./test.sh"
                     sh "python3 test.py"
+                    sh "cd savedb"
+		    sh "python3 test.py"
                 }
             }
         }
