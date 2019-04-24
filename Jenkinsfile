@@ -23,6 +23,7 @@ podTemplate(label: label, containers: [
 		    sh "cp test ./creds/serviceaccount.json"
               	    sh "cat ./creds/serviceaccount.json"
 		    sh "pip3 install -r ./app/requirements.txt"
+		    sh "./test.sh"
                     sh "python3 test.py"
                 }
             }
