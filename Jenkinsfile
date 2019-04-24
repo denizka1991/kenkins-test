@@ -30,6 +30,9 @@ podTemplate(label: label, containers: [
 		    sh "cd .."
 		    sh "cd saveredis"
                     sh "python3 test.py"
+                    sh "cd .."
+		    sh "cd getfromdb"
+                    sh "python3 test.py"
                 }
             }
         }
