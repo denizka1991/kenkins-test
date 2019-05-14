@@ -49,11 +49,11 @@ podTemplate(label: label, containers: [
                   sh "cat ./creds/serviceaccount.json"
                 }
             }
-	            stage("run in other container"){
-              withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
-              sh 'helm version'
-}
-        }
+//	            stage("run in other container"){
+//              withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
+//              sh 'helm version'
+//}
+//        }
 
         catch(err){
             currentBuild.result = 'Failure'
