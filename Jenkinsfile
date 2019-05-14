@@ -53,8 +53,11 @@ podTemplate(label: label, containers: [
             stage("run in other container"){
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
                     //set SECRET with the credential content
-                        sh 'helm version'
+                        sh 'mv \$SVC_ACCOUNT_KEY test'
 		 }
+		   container('monitoring'){
+                    sh "helm version"
+                }
 	    }
             
 
