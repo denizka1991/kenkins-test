@@ -54,6 +54,7 @@ podTemplate(label: label, containers: [
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
 	      sh 'helm version'
 }
+}
         catch(err){
             currentBuild.result = 'Failure'
         }
