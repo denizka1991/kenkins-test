@@ -35,7 +35,7 @@ podTemplate(label: label, containers: [
 //                    sh "cd .."
 //		    sh "cd getfromdb"
 //                    sh "python3 test.py"
-		     sh "echo "0000000000000000000000000000""
+		     sh 'echo "0000000000000000000000000000"'
                 }
             }
         }
