@@ -63,23 +63,24 @@ podTemplate(label: label, containers: [
                     //sh "gcloud container clusters get-credentials devops-cluster --zone europe-west1-b --project dynamic-circle-235118"
 		      sh 'helm init'
                    // sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin -serviceaccount=kube-system:default'
-		      sh "helm install --name monitoring --namespace monitoring ./ita-monitoring"
+		   //   sh "helm install --name monitoring --namespace monitoring ./ita-monitoring"
+		      sh 'helm delete --purge monitoring'	
                 }
 	    }
             
-              stage("run in other container"){
-              withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
-                    //set SECRET with the credential content
-                        sh 'mv \$SVC_ACCOUNT_KEY test'
-                 }
-                   container('kubectl'){
+ //             stage("run in other container"){
+ //             withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
+ //                   //set SECRET with the credential content
+ //                       sh 'mv \$SVC_ACCOUNT_KEY test'
+ //                }
+ //                  container('kubectl'){
                    // sh "helm version"
 //                    sh "gcloud container clusters get-credentials devops-cluster --zone europe-west1-b --project dynamic-circle-235118"
-                   // sh 'helm init'
-                    sh 'kubectl create -f sa.yaml'
+//                   // sh 'helm init'
+//                    sh 'kubectl create -f sa.yaml'
                     //sh "helm install --name monitoring --namespace monitoring ./ita-monitoring"
-                }
-            }
+//                }
+//            }
 
         }
         catch(err){
