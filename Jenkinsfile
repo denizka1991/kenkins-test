@@ -63,7 +63,7 @@ podTemplate(label: label, containers: [
                     //sh "gcloud container clusters get-credentials devops-cluster --zone europe-west1-b --project dynamic-circle-235118"
 		      sh 'helm init'
 		      sh 'helm repo update'
-		      sh 'helm depo update'
+		      sh 'helm dep update'
                    // sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin -serviceaccount=kube-system:default'
 		      sh "helm upgrade --install --name monitoring --namespace monitoring ./ita-monitoring"
 		  //    sh 'helm delete --purge monitoring'	
