@@ -20,21 +20,22 @@ podTemplate(label: label, containers: [
             stage("run in one container"){
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
                 container("python"){
-		    sh 'mkdir -p creds'
-                    sh 'mv \$SVC_ACCOUNT_KEY test'
-		    sh "cp test ./creds/serviceaccount.json"
-              	    sh "cat ./creds/serviceaccount.json"
-		    sh "pip3 install -r ./app/requirements.txt"
-		    sh "./test.sh"
-                    sh "python3 test.py"
-                    sh "cd savedb"
-		    sh "python3 test.py"
-		    sh "cd .."
-		    sh "cd saveredis"
-                    sh "python3 test.py"
-                    sh "cd .."
-		    sh "cd getfromdb"
-                    sh "python3 test.py"
+//		    sh 'mkdir -p creds'
+//                    sh 'mv \$SVC_ACCOUNT_KEY test'
+//		    sh "cp test ./creds/serviceaccount.json"
+//              	    sh "cat ./creds/serviceaccount.json"
+//		    sh "pip3 install -r ./app/requirements.txt"
+//		    sh "./test.sh"
+//                    sh "python3 test.py"
+//                    sh "cd savedb"
+//		    sh "python3 test.py"
+//		    sh "cd .."
+//		    sh "cd saveredis"
+//                    sh "python3 test.py"
+//                    sh "cd .."
+//		    sh "cd getfromdb"
+//                    sh "python3 test.py"
+		     sh "echo "0000000000000000000000000000""
                 }
             }
         }
@@ -57,7 +58,7 @@ podTemplate(label: label, containers: [
                     //set SECRET with the credential content
                         sh 'mv \$SVC_ACCOUNT_KEY test'
                  }
-                   container('monitoring'){
+                   container('kubectl'){
                    // sh "helm version"
 //                    sh "gcloud container clusters get-credentials devops-cluster --zone europe-west1-b --project dynamic-circle-235118"
                    // sh 'helm init'
@@ -71,7 +72,7 @@ podTemplate(label: label, containers: [
                     //set SECRET with the credential content
                         sh 'mv \$SVC_ACCOUNT_KEY test'
 		 }
-		   container('kubectl'){
+		   container('monitoring'){
                     //sh "helm version"
 //                    sh "gcloud container clusters get-credentials devops-cluster --zone europe-west1-b --project dynamic-circle-235118"
 		      sh 'helm init'
