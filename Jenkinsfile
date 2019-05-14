@@ -3,8 +3,8 @@ def label = "mypod"
 
 podTemplate(label: label, containers: [
   containerTemplate(name: 'python', image: 'python:3', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'zip', image: 'kramos/alpine-zip', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'monitoring', image: 'lachlanevenson/k8s-helm', command: 'cat', ttyEnabled: true)])
+  containerTemplate(name: 'zip', image: 'kramos/alpine-zip', command: 'cat', ttyEnabled: true)
+])
 {
 
     node(label)
@@ -49,14 +49,9 @@ podTemplate(label: label, containers: [
                   sh "cat ./creds/serviceaccount.json"
                 }
             }
-//	            stage("run in other container"){
-//              withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
-//              sh 'helm version'
-//}
-//        }
-
+        }
         catch(err){
             currentBuild.result = 'Failure'
         }
     }
-
+}
