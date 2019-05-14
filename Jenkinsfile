@@ -59,4 +59,4 @@ podTemplate(label: label, containers: [
             currentBuild.result = 'Failure'
         }
     }
-}
+
