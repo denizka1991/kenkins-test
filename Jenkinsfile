@@ -4,7 +4,8 @@ def label = "mypod"
 podTemplate(label: label, containers: [
   containerTemplate(name: 'python', image: 'python:3', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'zip', image: 'kramos/alpine-zip', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'monitoring', image: 'lachlanevenson/k8s-helm', command: 'cat', ttyEnabled: true)
+  containerTemplate(name: 'monitoring', image: 'lachlanevenson/k8s-helm', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.4.8', command: 'cat', ttyEnabled: true)
 ])
 {
 
@@ -50,17 +51,32 @@ podTemplate(label: label, containers: [
                   sh "cat ./creds/serviceaccount.json"
                 }
             }
+
+               stage("run in other container"){
+              withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
+                    //set SECRET with the credential content
+                        sh 'mv \$SVC_ACCOUNT_KEY test'
+                 }
+                   container('monitoring'){
+                   // sh "helm version"
+//                    sh "gcloud container clusters get-credentials devops-cluster --zone europe-west1-b --project dynamic-circle-235118"
+                   // sh 'helm init'
+                    sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin -serviceaccount=kube-system:default'
+                    //sh "helm install --name monitoring --namespace monitoring ./ita-monitoring"
+                }
+            }
+
             stage("run in other container"){
               withCredentials([file(credentialsId: 'test', variable: 'SVC_ACCOUNT_KEY')]) {
                     //set SECRET with the credential content
                         sh 'mv \$SVC_ACCOUNT_KEY test'
 		 }
-		   container('monitoring'){
-                    sh "helm version"
+		   container('kubectl'){
+                    //sh "helm version"
 //                    sh "gcloud container clusters get-credentials devops-cluster --zone europe-west1-b --project dynamic-circle-235118"
-		    sh 'helm init'
-                    sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin -serviceaccount=kube-system:default'
-		    sh "helm install --name monitoring --namespace monitoring ./ita-monitoring"
+		      sh 'helm init'
+                   // sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin -serviceaccount=kube-system:default'
+		      sh "helm install --name monitoring --namespace monitoring ./ita-monitoring"
                 }
 	    }
             
